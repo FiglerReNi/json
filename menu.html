@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Make a drop down list based on JSON data.</h2>
+
+<p id="demo"></p>
+
+<script>
+    var obj, dbParam, xmlhttp, myObj, x, txt = "";
+    obj = { table: "customers", limit: 3 };
+    dbParam = JSON.stringify(obj);
+
+    xmlhttp = new XMLHttpRequest();
+
+    xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            myObj = JSON.parse(this.responseText);
+            txt += "<select>";
+            for(x=0; x < myObj.length; x++){
+                txt += "<option>" + myObj[x][1];
+            }
+            txt += "</select>";
+            document.getElementById("demo").innerHTML = txt;
+        }
+    };
+    xmlhttp.open("POST", "menu.php", true);
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("x=" + dbParam);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<button onclick="clickButton()">Click me!</button>
+
+<p id="demo"></p>
+
+<script>
+    function clickButton() {
+        var obj, s, dbparam;
+        obj = { table: "customers", limit: 2 };
+        dbparam = JSON.stringify(obj);
+        s = document.createElement("script");
+        s.src = "jsonp.php?x=" + dbparam;
+        document.body.appendChild(s);
+    }
+
+    function myFunc(myObj) {
+        debugger;
+        var x, txt = "";
+        for(x=0; x < myObj.length; x++){
+            txt += myObj[x][1] + "<br>";
+        }
+        document.getElementById("demo").innerHTML = txt;
+    }
+</script>
+
+</body>
+</html>
